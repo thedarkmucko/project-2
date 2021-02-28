@@ -21,7 +21,7 @@ class Ingestor(IngestorInterface):
 
         return False
 
-    @abstractmethod
     @classmethod
-    def parse(cls, path) -> List[QuoteModel]:
-        pass
+    def parse(cls, path):
+        if Ingestor.can_ingest(path):
+            cls().parse(path)
