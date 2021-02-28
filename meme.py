@@ -32,7 +32,7 @@ def fill_text(path: str) -> pathlib.Path:
 
 
 class MemeEngine(object):
-    def __init__(self, path: str) -> pathlib.Path:
+    def __init__(self) -> pathlib.Path:
         pass
 
     @staticmethod
@@ -45,8 +45,6 @@ class MemeEngine(object):
 
 def generate_meme(path=None, body=None, author=None):
     """ Generate a meme given an path and a quote """
-    img = None
-    quote = None
 
     if path is None:
         images = "./_data/photos/dog/"
@@ -73,15 +71,22 @@ def generate_meme(path=None, body=None, author=None):
             raise Exception('Author Required if Body is Used')
         quote = QuoteModel(body, author)
 
-    meme = MemeEngine('./tmp')
-    path = make_meme(img, quote.body, quote.author)
+    meme = MemeEngine()
+    path = meme.make_meme(img, quote.body, quote.author)
     return path
 
 
+def make_parser():
+    import argparse
+    parser = argparse.ArgumentParser("An argument parser for meme generator")
+    parser.add_argument('--path', help="Path to a picture")
+    parser.add_argument('--body', help="Quote text to be added to a picture")
+    parser.add_argument('--author', help="Author of the quote")
+
+    parsed = parser.parse_args()
+    return parsed
+
+
 if __name__ == "__main__":
-    # @TODO Use ArgumentParser to parse the following CLI arguments
-    # path - path to an image file
-    # body - quote body to add to the image
-    # author - quote author to add to the image
-    args = None
+    args = make_parser()
     print(generate_meme(args.path, args.body, args.author))
