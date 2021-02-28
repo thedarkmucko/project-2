@@ -22,7 +22,7 @@ class PDFIngestor(ingestor.IngestorInterface):
         process = subprocess.Popen(cmd, stdout=subprocess.PIPE)
         
         output, _ = process.communicate()
-        output = output.split('\n')
+        output = output.splitlines()
 
         for item in output:
             quote, author = item.split('-')
