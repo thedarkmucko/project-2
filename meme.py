@@ -1,9 +1,47 @@
 import os
 import random
+import PIL
+import pathlib
 
-# @TODO Import your Ingestor and MemeEngine classes
-from src import Ingestor
-from src.QuoteEngine.quote import QuoteModel
+from . import Ingestor
+from .QuoteEngine.quote import QuoteModel
+
+
+def resize_image(path: str) -> pathlib.Path:
+    try:
+        img = PIL.Image.open(path)
+    except PIL.UnidentifiedImageError:
+        print("failed to open image")
+
+    img_width, img_height = img.size
+    if img_width > 500:
+        width = 500
+        ratio = width / img_width
+        height = int(ratio * float(img_height))
+
+    img = img.resize((width, height), PIL.Image.NEAREST)
+
+    from pathlib import Path
+    p = Path.resolve(path).parent
+
+    img.save(p / 'resized', "JPEG")
+    return pathlib.Path(img)
+
+
+def fill_text(path: str) -> pathlib.Path:
+    pass
+
+
+class MemeEngine(object):
+    def __init__(self, path: str) -> pathlib.Path:
+        pass
+
+    @staticmethod
+    def make_meme(img, body: str, author: str) -> str:
+        """return a resized meme with body and text, path to this JPEG"""
+        resized_image = resize_image(img)
+        outfile = fill_text(resized_image)
+        return outfile
 
 
 def generate_meme(path=None, body=None, author=None):
@@ -37,7 +75,7 @@ def generate_meme(path=None, body=None, author=None):
         quote = QuoteModel(body, author)
 
     meme = MemeEngine('./tmp')
-    path = meme.make_meme(img, quote.body, quote.author)
+    path = make_meme(img, quote.body, quote.author)
     return path
 
 
