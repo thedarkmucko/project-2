@@ -1,12 +1,10 @@
 from abc import abstractmethod
-from typing import List
 
 from ..Ingestor.csvingestor import CSVIngestor
 from ..Ingestor.docxingestor import DocxIngestor
 from ..Ingestor.interface_ingestor import IngestorInterface
 from ..Ingestor.pdfingestor import PDFIngestor
 from ..Ingestor.txtingestor import TXTIngestor
-from ..QuoteEngine.quote import QuoteModel
 
 
 class Ingestor(IngestorInterface):
@@ -14,14 +12,13 @@ class Ingestor(IngestorInterface):
     ingestors = [DocxIngestor, CSVIngestor, PDFIngestor, TXTIngestor]
 
     @classmethod
-    def can_ingest(cls, path) -> bool:
+    def can_ingest(cls, path):
         for ingestor in cls.ingestors:
             if ingestor.can_ingest(path):
-                return True
+                ingestor.parse(path)
 
-        return False
-
+    @abstractmethod
     @classmethod
     def parse(cls, path):
-        if Ingestor.can_ingest(path):
-            cls().parse(path)
+        """will never be called"""
+        pass
