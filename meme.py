@@ -8,6 +8,7 @@ from .QuoteEngine.quote import QuoteModel
 
 
 def resize_image(path: str) -> pathlib.Path:
+    """resize an image to max widht 500px and height ratio-ed"""
     try:
         img = PIL.Image.open(path)
     except PIL.UnidentifiedImageError:
@@ -20,9 +21,7 @@ def resize_image(path: str) -> pathlib.Path:
         height = int(ratio * float(img_height))
 
     img = img.resize((width, height), PIL.Image.NEAREST)
-
-    from pathlib import Path
-    p = Path.resolve(path).parent
+    p = pathlib.Path.resolve(path).parent
 
     img.save(p / 'resized', "JPEG")
     return pathlib.Path(img)
