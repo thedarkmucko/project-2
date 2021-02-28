@@ -15,11 +15,11 @@ class Ingestor(IngestorInterface):
 
     @classmethod
     def can_ingest(cls, path) -> bool:
-        for ingest in cls.ingestors:
-            if ingest.can_ingest(path):
+        for ingestor in cls.ingestors:
+            if ingestor.can_ingest(path):
                 return True
-            else:
-                return False
+
+        return False
 
     @abstractmethod
     @classmethod
