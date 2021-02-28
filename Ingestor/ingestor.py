@@ -13,12 +13,11 @@ class Ingestor(IngestorInterface):
 
     @classmethod
     def can_ingest(cls, path):
-        for ingestor in cls.ingestors:
-            if ingestor.can_ingest(path):
-                ingestor.parse(path)
+        ext = path.split('.')[-1]
+        return ext in cls.allowed_extensions
 
-    @abstractmethod
     @classmethod
     def parse(cls, path):
-        """will never be called"""
-        pass
+        for ingestor in cls.ingestors:
+            if ingestor.can_ingest(path):
+                return ingestor.parse(path)
