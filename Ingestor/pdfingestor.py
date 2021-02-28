@@ -17,6 +17,7 @@ class PDFIngestor(ingestor.IngestorInterface):
             raise Exception('cannot ingest exception')
 
         quotes: list[QuoteModel] = []
+
         cmd = ["pdftotxt", path]
         process = subprocess.Popen(cmd, stdout=subprocess.PIPE)
         

@@ -1,12 +1,12 @@
 from abc import abstractmethod
 from typing import List
 
-from src.Ingestor.csvingestor import CSVIngestor
-from src.Ingestor.docxingestor import DocxIngestor
-from src.Ingestor.interface_ingestor import IngestorInterface
-from src.Ingestor.pdfingestor import PDFIngestor
-from src.Ingestor.txtingestor import TXTIngestor
-from src.QuoteEngine.quote import QuoteModel
+from ..Ingestor.csvingestor import CSVIngestor
+from ..Ingestor.docxingestor import DocxIngestor
+from ..Ingestor.interface_ingestor import IngestorInterface
+from ..Ingestor.pdfingestor import PDFIngestor
+from ..Ingestor.txtingestor import TXTIngestor
+from ..QuoteEngine.quote import QuoteModel
 
 
 class Ingestor(IngestorInterface):
