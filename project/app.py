@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from src.MemeEngine.meme import MemeEngine
+from meme_proj.project.MemeEngine.meme import MemeEngine
 
 
 # @TODO Import your Ingestor and MemeEngine classes
@@ -21,7 +21,7 @@ def setup():
     # quote_files variable
     quotes = None
 
-    images_path = "./_data/photos/dog/"
+    images_path = "_data/photos/dog/"
 
     # TODO: Use the pythons standard library os class to find all
     # images within the images images_path directory
