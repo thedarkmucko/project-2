@@ -3,7 +3,7 @@ import pathlib
 import random
 import PIL
 
-from ..Ingestor.ingestor import Ingestor
+from ..Ingestors.ingestor import Ingestor
 from ..QuoteEngine.quote import QuoteModel
 
 
