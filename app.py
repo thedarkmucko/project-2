@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from meme_proj.project.MemeEngine.meme import MemeEngine
+from meme_proj.MemeEngine import MemeEngine
 
 
 # @TODO Import your Ingestors and MemeEngine classes

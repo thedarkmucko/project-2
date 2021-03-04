@@ -1,7 +1,7 @@
 from typing import List
 import subprocess
 from . import ingestor
-from meme_proj.project.QuoteEngine.quote import QuoteModel
+from meme_proj.QuoteEngine.quote import QuoteModel
 
 
 class PDFIngestor(ingestor.IngestorInterface):
