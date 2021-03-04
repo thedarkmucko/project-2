@@ -1,11 +1,10 @@
 import os
 import pathlib
 import random
-
 import PIL
 
-from meme_proj.project.Ingestor import ingestor
-from ..QuoteEngine import quote
+from ..Ingestor.ingestor import Ingestor
+from ..QuoteEngine.quote import QuoteModel
 
 
 def resize_image(path: str) -> pathlib.Path:
@@ -71,13 +70,13 @@ def generate_meme(path=None, body=None, author=None):
                        './_data/DogQuotes/DogQuotesCSV.csv']
         quotes = []
         for f in quote_files:
-            quotes.extend(ingestor.Ingestor.parse(f))
+            quotes.extend(Ingestor.parse(f))
 
         _quote = random.choice(quotes)
     else:
         if author is None:
             raise Exception('Author Required if Body is Used')
-        _quote = quote.QuoteModel(body, author)
+        _quote = QuoteModel(body, author)
 
     path = MemeEngine.make_meme(img, _quote.body, _quote.author)
     return path
