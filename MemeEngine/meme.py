@@ -1,10 +1,11 @@
 import os
-import random
-import PIL
 import pathlib
+import random
 
-from . import Ingestor
-from .QuoteEngine.quote import QuoteModel
+import PIL
+
+from src.Ingestor import ingestor
+from src.QuoteEngine import quote
 
 
 def resize_image(path: str) -> pathlib.Path:
@@ -24,22 +25,29 @@ def resize_image(path: str) -> pathlib.Path:
     p = pathlib.Path.resolve(path).parent
 
     img.save(p / 'resized', "JPEG")
-    return pathlib.Path(img)
+    return pathlib.Path(p/'resized.jpeg')
 
 
-def fill_text(path: str) -> pathlib.Path:
-    pass
+def fill_text(path: str, body: str, author: str) -> pathlib.Path:
+    img = PIL.Image.open(path)
+    draw = PIL.ImageDraw.Draw(img)
+    font = PIL.ImageFont.truetype('./fonts/OpenSans-Regular.ttf', size=20)
+    message = body + ': ' + author
+    draw.text((10, 30), message, font=font, fill='white')
+
+    p = pathlib.Path.resolve(path).parent
+
+    img.save(p / 'texted', "JPEG")
+    return pathlib.Path(p/'texted.jpeg')
 
 
 class MemeEngine(object):
-    def __init__(self) -> pathlib.Path:
-        pass
 
     @staticmethod
     def make_meme(img, body: str, author: str) -> str:
         """return a resized meme with body and text, path to this JPEG"""
         resized_image = resize_image(img)
-        outfile = fill_text(resized_image)
+        outfile = fill_text(resized_image, body, author)
         return outfile
 
 
@@ -63,16 +71,15 @@ def generate_meme(path=None, body=None, author=None):
                        './_data/DogQuotes/DogQuotesCSV.csv']
         quotes = []
         for f in quote_files:
-            quotes.extend(Ingestor.parse(f))
+            quotes.extend(ingestor.Ingestor.parse(f))
 
-        quote = random.choice(quotes)
+        _quote = random.choice(quotes)
     else:
         if author is None:
             raise Exception('Author Required if Body is Used')
-        quote = QuoteModel(body, author)
+        _quote = quote.QuoteModel(body, author)
 
-    meme = MemeEngine()
-    path = meme.make_meme(img, quote.body, quote.author)
+    path = MemeEngine.make_meme(img, _quote.body, _quote.author)
     return path
 
 

@@ -1,8 +1,5 @@
-import random
-import os
-import requests
-from flask import Flask, render_template, abort, request
-import MemeEngine
+from flask import Flask, render_template
+from src.MemeEngine.meme import MemeEngine
 
 
 # @TODO Import your Ingestor and MemeEngine classes
