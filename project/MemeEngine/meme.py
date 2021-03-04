@@ -4,8 +4,8 @@ import random
 
 import PIL
 
-from ..Ingestor.ingestor import Ingestor
-from meme_proj.project.QuoteEngine import quote
+from ..Ingestor import ingestor
+from ..QuoteEngine import quote
 
 
 def resize_image(path: str) -> pathlib.Path:
@@ -71,7 +71,7 @@ def generate_meme(path=None, body=None, author=None):
                        './_data/DogQuotes/DogQuotesCSV.csv']
         quotes = []
         for f in quote_files:
-            quotes.extend(Ingestor.parse(f))
+            quotes.extend(ingestor.Ingestor.parse(f))
 
         _quote = random.choice(quotes)
     else:
