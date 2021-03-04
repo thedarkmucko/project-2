@@ -4,7 +4,7 @@ import random
 
 import PIL
 
-from ..Ingestor import ingestor
+from meme_proj.project.Ingestor import ingestor
 from ..QuoteEngine import quote
 
 
