@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from meme_proj.project.MemeEngine.meme import MemeEngine
 
 
-# @TODO Import your Ingestor and MemeEngine classes
+# @TODO Import your Ingestors and MemeEngine classes
 
 app = Flask(__name__)
 
@@ -17,7 +17,7 @@ def setup():
                    './_data/DogQuotes/DogQuotesPDF.pdf',
                    './_data/DogQuotes/DogQuotesCSV.csv']
 
-    # TODO: Use the Ingestor class to parse all files in the
+    # TODO: Use the Ingestors class to parse all files in the
     # quote_files variable
     quotes = None
 

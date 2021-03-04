@@ -1,10 +1,8 @@
-from abc import abstractmethod
-
-from ..Ingestor.csvingestor import CSVIngestor
-from ..Ingestor.docxingestor import DocxIngestor
-from ..Ingestor.interface_ingestor import IngestorInterface
-from ..Ingestor.pdfingestor import PDFIngestor
-from ..Ingestor.txtingestor import TXTIngestor
+from .csvingestor import CSVIngestor
+from .docxingestor import DocxIngestor
+from .interface_ingestor import IngestorInterface
+from .pdfingestor import PDFIngestor
+from .txtingestor import TXTIngestor
 
 
 class Ingestor(IngestorInterface):
