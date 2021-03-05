@@ -1,6 +1,6 @@
 from typing import List
 import pandas
-from .ingestor import IngestorInterface
+from .interface_ingestor import IngestorInterface
 from ..QuoteEngine.quote import QuoteModel
 
 
