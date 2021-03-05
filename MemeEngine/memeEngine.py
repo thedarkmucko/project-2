@@ -29,7 +29,7 @@ def fill_text(path: str, body: str, author: str):
     try:
         img = Image.open(path)
         draw = ImageDraw.Draw(img)
-        font = ImageFont.truetype('./fonts/OpenSans-Regular.ttf', size=20)
+        font = ImageFont.truetype('./fonts/OpenSans-Regular.ttf', size=40)
         message = body + ': ' + author
         draw.text((10, 30), message, font=font, fill='white')
         img.save("./tmp/printme.jpeg")
