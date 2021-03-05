@@ -1,9 +1,8 @@
 import os
-import pathlib
 import random
-import MemeEngine
-import QuoteEngine
+
 import Ingestors
+import MemeEngine
 
 
 def generate_meme(path=None, body=None, author=None):
@@ -50,6 +49,7 @@ def make_parser():
 
 
 if __name__ == "__main__":
+    print(__name__)
     dir(MemeEngine)
     """args = make_parser()
     print(generate_meme(args.path, args.body, args.author))"""
