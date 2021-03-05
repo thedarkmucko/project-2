@@ -1,7 +1,7 @@
 import os
 import random
 
-import Ingestors
+from Ingestors import ingestor
 import MemeEngine
 
 
@@ -25,13 +25,12 @@ def generate_meme(path=None, body=None, author=None):
                        './_data/DogQuotes/DogQuotesCSV.csv']
         quotes = []
         for f in quote_files:
-            quotes.extend(Ingestors.ingestor.Ingestor.parse(f))
+            quotes.extend(ingestor.Ingestor.parse(f))
 
         _quote = random.choice(quotes)
     else:
-        if author is None:
+        if author is None or body is None:
             raise Exception('Author Required if Body is Used')
-        _quote = MemeEngine.generate_meme(body, author)
 
     path = MemeEngine.make_meme(img, _quote.body, _quote.author)
     return path
@@ -49,7 +48,5 @@ def make_parser():
 
 
 if __name__ == "__main__":
-    print(__name__)
-    print(dir(MemeEngine))
-    """args = make_parser()
-    print(generate_meme(args.path, args.body, args.author))"""
+    args = make_parser()
+    print(generate_meme(args.path, args.body, args.author))

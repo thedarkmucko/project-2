@@ -35,7 +35,7 @@ def fill_text(path: str, body: str, author: str) -> pathlib.Path:
     return pathlib.Path(p/'texted.jpeg')
 
 
-class MemeEngine(object):
+class MemeEngine:
 
     @staticmethod
     def make_meme(img, body: str, author: str) -> str:
