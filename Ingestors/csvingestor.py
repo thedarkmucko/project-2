@@ -1,10 +1,10 @@
 from typing import List
 import pandas
-from . import ingestor
+from .ingestor import IngestorInterface
 from ..QuoteEngine.quote import QuoteModel
 
 
-class CSVIngestor(ingestor.IngestorInterface):
+class CSVIngestor(IngestorInterface):
     allowed_extensions = ['csv']
 
     @classmethod

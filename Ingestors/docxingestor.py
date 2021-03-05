@@ -1,10 +1,10 @@
 from typing import List
 import docx
-from . import ingestor
+from .interface_ingestor import IngestorInterface
 from ..QuoteEngine.quote import QuoteModel
 
 
-class DocxIngestor(ingestor.IngestorInterface):
+class DocxIngestor(IngestorInterface):
     allowed_extensions = ['docx']
 
     @classmethod

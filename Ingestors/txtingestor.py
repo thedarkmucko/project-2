@@ -1,10 +1,10 @@
 from typing import List
 
-from . import ingestor
+from .ingestor import IngestorInterface
 from ..QuoteEngine.quote import QuoteModel
 
 
-class TXTIngestor(ingestor.IngestorInterface):
+class TXTIngestor(IngestorInterface):
     allowed_extensions = ['txt']
 
     @classmethod

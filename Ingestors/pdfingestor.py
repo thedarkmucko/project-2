@@ -1,10 +1,10 @@
 from typing import List
 import subprocess
-from . import ingestor
+from .ingestor import IngestorInterface
 from ..QuoteEngine.quote import QuoteModel
 
 
-class PDFIngestor(ingestor.IngestorInterface):
+class PDFIngestor(IngestorInterface):
     allowed_extensions = ['pdf']
 
     @classmethod
