@@ -1,7 +1,7 @@
 from typing import List
 import pandas
 from . import ingestor
-from meme_proj.QuoteEngine.quote import QuoteModel
+from ..QuoteEngine.quote import QuoteModel
 
 
 class CSVIngestor(ingestor.IngestorInterface):

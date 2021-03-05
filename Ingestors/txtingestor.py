@@ -1,7 +1,7 @@
 from typing import List
 
 from . import ingestor
-from meme_proj.QuoteEngine.quote import QuoteModel
+from ..QuoteEngine.quote import QuoteModel
 
 
 class TXTIngestor(ingestor.IngestorInterface):
