@@ -1,7 +1,6 @@
 from typing import List
 import subprocess
-from .ingestor import IngestorInterface
-from ..QuoteEngine.quote import QuoteModel
+from .interface_ingestor import IngestorInterface
 
 
 class PDFIngestor(IngestorInterface):
@@ -12,11 +11,11 @@ class PDFIngestor(IngestorInterface):
         return super().can_ingest(path)
 
     @classmethod
-    def parse(cls, path) -> List[QuoteModel]:
+    def parse(cls, path):
         if not cls.can_ingest(path):
             raise Exception('cannot ingest exception')
 
-        quotes: list[QuoteModel] = []
+        quotes = []
 
         cmd = ["pdftotxt", path]
         process = subprocess.Popen(cmd, stdout=subprocess.PIPE)
@@ -26,7 +25,7 @@ class PDFIngestor(IngestorInterface):
 
         for item in output:
             quote, author = item.split('-')
-            a_quote = QuoteModel(quote, author)
+            a_quote = quote.QuoteModel(quote, author)
             quotes.append(a_quote)
 
         return quotes

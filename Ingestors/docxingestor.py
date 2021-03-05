@@ -1,18 +1,17 @@
 from typing import List
 import docx
 from .interface_ingestor import IngestorInterface
-from ..QuoteEngine.quote import QuoteModel
 
 
 class DocxIngestor(IngestorInterface):
     allowed_extensions = ['docx']
 
     @classmethod
-    def can_ingest(cls, path) -> bool:
+    def can_ingest(cls, path):
         return super().can_ingest(path)
 
     @classmethod
-    def parse(cls, path) -> List[QuoteModel]:
+    def parse(cls, path):
         if not cls.can_ingest(path):
             raise Exception('cannot ingest exception')
 
@@ -22,6 +21,7 @@ class DocxIngestor(IngestorInterface):
         for para in doc.paragraphs:
             if para.text != "":
                 parse = para.text.split('-')
+                from meme_proj.QuoteEngine.quote import QuoteModel
                 a_quote = QuoteModel(parse[0], parse[1])
                 quotes.append(a_quote)
 
