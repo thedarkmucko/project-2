@@ -50,5 +50,4 @@ def make_parser():
 
 if __name__ == "__main__":
     args = make_parser()
-    print(args)
     print(generate_meme(args.path, args.body, args.author))

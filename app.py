@@ -1,12 +1,12 @@
 from flask import Flask, render_template
-import meme_proj.MemeEngine
+import MemeEngine
+import QuoteEngine
+import Ingestors
 
 
 # @TODO Import your Ingestors and MemeEngine classes
 
 app = Flask(__name__)
-
-meme = meme_proj.MemeEngine('./static')
 
 
 def setup():
@@ -44,7 +44,7 @@ def meme_rand():
 
     img = None
     quote = None
-    path = meme_proj.MemeEngine.make_meme(img, quote.body, quote.author)
+    path = MemeEngine.make_meme(img, quote.body, quote.author)
     return render_template('meme.html', path=path)
 
 

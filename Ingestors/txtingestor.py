@@ -7,20 +7,21 @@ class TXTIngestor(IngestorInterface):
 
     @classmethod
     def can_ingest(cls, path) -> bool:
-        print("Yes I can ingest", cls.allowed_extensions)
-        return super().can_ingest(cls, path=path)
+        ext = path.split('.')[-1]
+        if ext in cls.allowed_extensions:
+            return True
+        return False
 
     @classmethod
     def parse(cls, path):
         print("parsing request", path)
-        if cls.can_ingest(path):
-            raise Exception('cannot ingest exception')
 
         quotes = []
-        with open(path, mode="r", newline='\n') as data:
+        with open(path, mode="r") as data:
             line = data.readline()
             _quote, _author = line.split('-')
             a_quote = QuoteModel(_quote.strip(), _author.strip())
+            print(a_quote)
             quotes.append(a_quote)
-        print(quotes)
+
         return quotes
