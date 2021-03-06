@@ -19,7 +19,7 @@ class CSVIngestor(IngestorInterface):
         df = pandas.read_csv(path, header=0)
 
         for index, row in df.iterrows():
-            from meme_proj.QuoteEngine.quote import QuoteModel
+            from meme_proj.QuoteEngine.Quote import QuoteModel
             a_quote = QuoteModel(row['body'], row['author'])
             quotes.append(a_quote)
 
