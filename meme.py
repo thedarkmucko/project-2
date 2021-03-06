@@ -15,6 +15,7 @@ def generate_meme(path=None, body=None, author=None):
             imgs = [os.path.join(root, name) for name in files]
 
         img = random.choice(imgs)
+        print(img)
     else:
         img = path[0]
 
@@ -25,7 +26,8 @@ def generate_meme(path=None, body=None, author=None):
                        './_data/DogQuotes/DogQuotesCSV.csv']
         quotes = []
         for f in quote_files:
-            quotes.extend(Ingestors.Ingestor.parse(f))
+            if f == './_data/DogQuotes/DogQuotesTXT.txt':
+                quotes = Ingestors.TXTIngestor.parse(f)
 
         _quote = random.choice(quotes)
     else:
@@ -49,4 +51,5 @@ def make_parser():
 
 if __name__ == "__main__":
     args = make_parser()
+    print(args)
     print(generate_meme(args.path, args.body, args.author))

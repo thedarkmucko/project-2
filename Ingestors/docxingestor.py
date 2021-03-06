@@ -8,7 +8,7 @@ class DocxIngestor(IngestorInterface):
 
     @classmethod
     def can_ingest(cls, path):
-        return super().can_ingest(path)
+        return super().can_ingest(cls,path=path)
 
     @classmethod
     def parse(cls, path):

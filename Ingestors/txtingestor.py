@@ -1,24 +1,25 @@
 from .interface_ingestor import IngestorInterface
 
-
 class TXTIngestor(IngestorInterface):
     allowed_extensions = ['txt']
 
     @classmethod
     def can_ingest(cls, path) -> bool:
-        return super().can_ingest(path)
+        print(cls.allowed_extensions)
+        return super().can_ingest(cls,path=path)
 
     @classmethod
     def parse(cls, path):
-        if not cls.can_ingest(path):
+        print("parsing request", path)
+        if cls.can_ingest(path):
             raise Exception('cannot ingest exception')
 
         quotes = []
         with open(path, mode="r", newline='\n') as data:
             line = data.readline()
-            quote, author = line.split('-')
-            from meme_proj.QuoteEngine.quote import QuoteModel
-            a_quote = QuoteModel(quote.strip(), author.strip())
+            _quote, _author = line.split('-')
+            from ..QuoteEngine import quote
+            a_quote = quote.QuoteModel(_quote.strip(), _author.strip())
             quotes.append(a_quote)
-
+        print(quotes)
         return quotes

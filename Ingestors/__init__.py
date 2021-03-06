@@ -16,5 +16,6 @@ class Ingestor(IngestorInterface):
     @classmethod
     def parse(cls, path):
         for ingestor in cls.ingestors:
-            if ingestor.can_ingest(path):
-                return ingestor.parse(path)
+            print(ingestor)
+            if ingestor.can_ingest(path=path):
+                return ingestor.parse(path=path)
