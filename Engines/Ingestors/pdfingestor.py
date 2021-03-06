@@ -10,7 +10,6 @@ class PDFIngestor(IngestorInterface):
     def can_ingest(cls, path) -> bool:
         ext = path.split('.')[-1]
         if ext in PDFIngestor.allowed_extensions:
-            print("returning True")
             return True
         return False
 

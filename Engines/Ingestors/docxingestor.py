@@ -10,7 +10,6 @@ class DocxIngestor(IngestorInterface):
     def can_ingest(cls, path):
         ext = path.split('.')[-1]
         if ext in DocxIngestor.allowed_extensions:
-            print("returning True")
             return True
         return False
 

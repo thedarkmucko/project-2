@@ -9,7 +9,6 @@ class TXTIngestor(IngestorInterface):
     def can_ingest(cls, path) -> bool:
         ext = path.split('.')[-1]
         if ext in TXTIngestor.allowed_extensions:
-            print("returning True")
             return True
         return False
 
