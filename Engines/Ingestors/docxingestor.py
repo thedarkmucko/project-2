@@ -1,4 +1,3 @@
-from typing import List
 import docx
 from .interface_ingestor import IngestorInterface
 
@@ -21,7 +20,7 @@ class DocxIngestor(IngestorInterface):
         for para in doc.paragraphs:
             if para.text != "":
                 parse = para.text.split('-')
-                from meme_proj.QuoteEngine.Quote import QuoteModel
+                from meme_proj.Engines.QuoteEngine import QuoteModel
                 a_quote = QuoteModel(parse[0], parse[1])
                 quotes.append(a_quote)
 

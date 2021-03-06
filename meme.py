@@ -1,7 +1,6 @@
 import os
 import random
-import Ingestors
-import MemeEngine
+from Engines import MemeEngine, Ingestors
 
 
 def generate_meme(path=None, body=None, author=None):

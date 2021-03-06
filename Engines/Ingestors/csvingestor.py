@@ -1,4 +1,3 @@
-from typing import List
 import pandas
 from .interface_ingestor import IngestorInterface
 
@@ -19,7 +18,7 @@ class CSVIngestor(IngestorInterface):
         df = pandas.read_csv(path, header=0)
 
         for index, row in df.iterrows():
-            from meme_proj.QuoteEngine.Quote import QuoteModel
+            from meme_proj.Engines.QuoteEngine import QuoteModel
             a_quote = QuoteModel(row['body'], row['author'])
             quotes.append(a_quote)
 

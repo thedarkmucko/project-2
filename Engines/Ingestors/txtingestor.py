@@ -1,5 +1,4 @@
 from .interface_ingestor import IngestorInterface
-from ..QuoteEngine.Quote import QuoteModel
 
 
 class TXTIngestor(IngestorInterface):
@@ -18,8 +17,13 @@ class TXTIngestor(IngestorInterface):
 
         quotes = []
         with open(path, mode="r") as data:
-            line = data.readline()
-            _quote, _author = line.split('-')
+            lines = data.readlines()
+
+        content = [line.strip('\n') for line in lines]
+
+        for item in content:
+            _quote, _author = item.split('-')
+            print(_quote, _author)
             a_quote = QuoteModel(_quote.strip(), _author.strip())
             print(a_quote)
             quotes.append(a_quote)

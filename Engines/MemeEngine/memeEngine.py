@@ -45,7 +45,7 @@ def make_housekeeping(path):
     os.chdir(_path)
     for child in _path.iterdir():
         child.unlink(missing_ok=True)
-    os.chdir('..')
+    os.chdir('../..')
 
 
 class MemeEngine:
