@@ -1,6 +1,6 @@
-from typing import List
 import subprocess
 from .interface_ingestor import IngestorInterface
+from ..QuoteEngine.Quote import QuoteModel
 
 
 class PDFIngestor(IngestorInterface):
@@ -8,7 +8,7 @@ class PDFIngestor(IngestorInterface):
 
     @classmethod
     def can_ingest(cls, path) -> bool:
-        return super().can_ingest(cls,path=path)
+        return super().can_ingest(path)
 
     @classmethod
     def parse(cls, path):
@@ -25,7 +25,7 @@ class PDFIngestor(IngestorInterface):
 
         for item in output:
             quote, author = item.split('-')
-            a_quote = quote.QuoteModel(quote, author)
+            a_quote = QuoteModel(quote, author)
             quotes.append(a_quote)
 
         return quotes

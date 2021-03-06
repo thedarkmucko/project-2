@@ -15,7 +15,8 @@ class Ingestor(IngestorInterface):
         return ext in cls.allowed_extensions
 
     @classmethod
-    def parse(cls, path):
+    def parse(cls, path) -> object:
         for ingestor in cls.ingestors:
-            if ingestor.can_ingest(path=path):
-                ingestor.parse(path=path)
+            if ingestor.can_ingest(path):
+                print(ingestor)
+                ingestor.parse(path)

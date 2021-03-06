@@ -1,18 +1,18 @@
 from .interface_ingestor import IngestorInterface
 from ..QuoteEngine.Quote import QuoteModel
 
+
 class TXTIngestor(IngestorInterface):
     allowed_extensions = ['txt']
 
-    @classmethod
-    def can_ingest(cls, path) -> bool:
+    def can_ingest(path) -> bool:
         ext = path.split('.')[-1]
-        if ext in cls.allowed_extensions:
+        if ext in TXTIngestor.allowed_extensions:
+            print("returning True")
             return True
         return False
 
-    @classmethod
-    def parse(cls, path):
+    def parse(path):
         quotes = []
         with open(path, mode="r") as data:
             lines = data.readlines()
@@ -24,6 +24,8 @@ class TXTIngestor(IngestorInterface):
             a_quote = QuoteModel(_quote.strip(), _author.strip())
             quotes.append(a_quote)
 
-        print("txtingestor.parse()",
-              quotes)
+        print("==================")
+        for i in quotes:
+            print(i)
+        print("==================")
         return quotes

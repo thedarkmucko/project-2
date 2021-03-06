@@ -2,11 +2,13 @@ import os
 import random
 from Engines import MemeEngine
 from Engines.Ingestors import Ingestor
+from Engines.QuoteEngine.Quote import QuoteModel
+from typing import List
 
 
 def generate_meme(path=None, body=None, author=None):
     """ Generate a meme given an path and a quote """
-
+    quotes = []
     if path is None:
         images = "./_data/photos/dog/"
         imgs = []
@@ -26,7 +28,7 @@ def generate_meme(path=None, body=None, author=None):
         for f in quote_files:
             if f == './_data/DogQuotes/DogQuotesTXT.txt':
                 # interesting, this returns None
-                quotes = Ingestor.parse(f)
+                quotes: List[QuoteModel] = Ingestor.parse(f)
 
         print("in meme.py", quotes)
         _quote = random.choice(quotes)

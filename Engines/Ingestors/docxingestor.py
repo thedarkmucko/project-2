@@ -1,5 +1,6 @@
 import docx
 from .interface_ingestor import IngestorInterface
+from ..QuoteEngine.Quote import QuoteModel
 
 
 class DocxIngestor(IngestorInterface):
@@ -7,7 +8,7 @@ class DocxIngestor(IngestorInterface):
 
     @classmethod
     def can_ingest(cls, path):
-        return super().can_ingest(cls,path=path)
+        return super().can_ingest(path)
 
     @classmethod
     def parse(cls, path):
@@ -20,7 +21,6 @@ class DocxIngestor(IngestorInterface):
         for para in doc.paragraphs:
             if para.text != "":
                 parse = para.text.split('-')
-                from meme_proj.Engines.QuoteEngine import QuoteModel
                 a_quote = QuoteModel(parse[0], parse[1])
                 quotes.append(a_quote)
 
