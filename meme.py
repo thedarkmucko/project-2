@@ -1,6 +1,7 @@
 import os
 import random
-from Engines import MemeEngine, Ingestors
+from Engines import MemeEngine
+from Engines.Ingestors import Ingestor
 
 
 def generate_meme(path=None, body=None, author=None):
@@ -13,7 +14,6 @@ def generate_meme(path=None, body=None, author=None):
             imgs = [os.path.join(root, name) for name in files]
 
         img = random.choice(imgs)
-        print(img)
     else:
         img = path[0]
 
@@ -22,11 +22,13 @@ def generate_meme(path=None, body=None, author=None):
                        './_data/DogQuotes/DogQuotesDOCX.docx',
                        './_data/DogQuotes/DogQuotesPDF.pdf',
                        './_data/DogQuotes/DogQuotesCSV.csv']
-        quotes = []
+
         for f in quote_files:
             if f == './_data/DogQuotes/DogQuotesTXT.txt':
-                quotes = Ingestors.Ingestor.parse(f)
+                # interesting, this returns None
+                quotes = Ingestor.parse(f)
 
+        print("in meme.py", quotes)
         _quote = random.choice(quotes)
     else:
         if author is None or body is None:

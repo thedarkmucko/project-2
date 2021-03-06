@@ -10,3 +10,7 @@ class QuoteModel:
     @property
     def author(self):
         return self.author
+
+
+    def __str__(self):
+        return f"{self._quote} - {self._author}"
