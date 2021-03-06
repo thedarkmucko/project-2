@@ -1,6 +1,5 @@
 import os
 import random
-
 import Ingestors
 import MemeEngine
 
@@ -27,7 +26,7 @@ def generate_meme(path=None, body=None, author=None):
         quotes = []
         for f in quote_files:
             if f == './_data/DogQuotes/DogQuotesTXT.txt':
-                quotes = Ingestors.TXTIngestor.parse(f)
+                quotes = Ingestors.Ingestor.parse(f)
 
         _quote = random.choice(quotes)
     else:
