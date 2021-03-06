@@ -1,5 +1,5 @@
 from .interface_ingestor import IngestorInterface
-from ..QuoteEngine.quote import QuoteModel
+from ..QuoteEngine import quote
 
 
 class TXTIngestor(IngestorInterface):
@@ -20,7 +20,7 @@ class TXTIngestor(IngestorInterface):
         with open(path, mode="r") as data:
             line = data.readline()
             _quote, _author = line.split('-')
-            a_quote = QuoteModel(_quote.strip(), _author.strip())
+            a_quote = quote.QuoteModel(_quote.strip(), _author.strip())
             print(a_quote)
             quotes.append(a_quote)
 
