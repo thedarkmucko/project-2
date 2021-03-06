@@ -30,7 +30,6 @@ def generate_meme(path=None, body=None, author=None):
                 # interesting, this returns None
                 quotes: List[QuoteModel] = Ingestor.parse(f)
 
-        print("in meme.py", quotes)
         _quote = random.choice(quotes)
     else:
         if author is None or body is None:
