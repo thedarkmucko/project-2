@@ -2,7 +2,7 @@ import os
 import random
 
 import Ingestors
-from MemeEngine import memeEngine
+import MemeEngine
 
 
 def generate_meme(path=None, body=None, author=None):
@@ -34,7 +34,7 @@ def generate_meme(path=None, body=None, author=None):
         if author is None or body is None:
             raise Exception('Author Required if Body is Used')
 
-    path = memeEngine.MemeEngine.make_meme(path, body, author)
+    path = MemeEngine.make_meme(path, body, author)
     return path
 
 
