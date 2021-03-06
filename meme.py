@@ -1,6 +1,6 @@
 import os
 import random
-from Engines import MemeEngine
+from Engines.MemeEngine.memeEngine import MemeEngine
 from Engines.Ingestors import Ingestor
 from Engines.QuoteEngine.Quote import QuoteModel
 from typing import List
@@ -35,7 +35,7 @@ def generate_meme(path=None, body=None, author=None):
         if author is None or body is None:
             raise Exception('Author Required if Body is Used')
 
-    path = MemeEngine.make_meme(path, body, author)
+    path =  MemeEngine.make_meme(path, body, author)
     return path
 
 
