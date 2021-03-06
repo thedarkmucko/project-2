@@ -8,13 +8,14 @@ class CSVIngestor(IngestorInterface):
 
     @classmethod
     def can_ingest(cls, path) -> bool:
-        return super().can_ingest(path)
+        ext = path.split('.')[-1]
+        if ext in CSVIngestor.allowed_extensions:
+            print("returning True")
+            return True
+        return False
 
     @classmethod
     def parse(cls, path):
-        if not cls.can_ingest(path):
-            raise Exception('cannot ingest exception')
-
         quotes= []
         df = pandas.read_csv(path, header=0)
 

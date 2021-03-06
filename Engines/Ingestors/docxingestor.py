@@ -8,12 +8,14 @@ class DocxIngestor(IngestorInterface):
 
     @classmethod
     def can_ingest(cls, path):
-        return super().can_ingest(path)
+        ext = path.split('.')[-1]
+        if ext in DocxIngestor.allowed_extensions:
+            print("returning True")
+            return True
+        return False
 
     @classmethod
     def parse(cls, path):
-        if not cls.can_ingest(path):
-            raise Exception('cannot ingest exception')
 
         quotes = []
         doc = docx.Document(path)

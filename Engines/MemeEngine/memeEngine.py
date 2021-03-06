@@ -16,25 +16,25 @@ def resize_image(_in: str, _width: int):
         ratio = width / img_width
         height = int(ratio * float(img_height))
         img = img.resize((width, height), Image.NEAREST)
-        img.save(f"./tmp/{output_file}.jpg")
+        img.save(f"./Engines/tmp/{output_file}.jpg")
     else:
-        img.save(f"./tmp/{output_file}.jpg")
+        img.save(f"./Engines/tmp/{output_file}.jpg")
 
-    return f"./tmp/{output_file}.jpg"
+    return f"./Engines/tmp/{output_file}.jpg"
 
 
 def fill_text(path: str, body: str, author: str):
     try:
         img = Image.open(path)
         draw = ImageDraw.Draw(img)
-        font = ImageFont.truetype('./fonts/OpenSans-Regular.ttf', size=40)
+        font = ImageFont.truetype('./fonts/OpenSans-Regular.ttf', size=20)
         message = '\"'+ body + '\", said ' + author
-        draw.text((10, 30), message, font=font, fill='white')
-        img.save("./tmp/printme.jpeg")
-    except Exception:
-        print("Exception caught")
+        draw.text((10, 30), message, font=font, fill='red')
+        img.save("./Engines/tmp/printme.jpeg")
+    except Exception as e:
+        print("Exception caught: ",e)
 
-    return "./tmp/printme.jpg"
+    return "./Engines/tmp/printme.jpg"
 
 
 def make_housekeeping(path):
@@ -51,7 +51,7 @@ def make_housekeeping(path):
 class MemeEngine:
     @staticmethod
     def make_meme(img, body: str, author: str, width=500):
-        make_housekeeping("./tmp")
+        make_housekeeping("./Engines/tmp")
         resized_image = resize_image(img, width)
         outfile = fill_text(resized_image, body, author)
         return outfile

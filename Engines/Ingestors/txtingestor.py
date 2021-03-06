@@ -5,14 +5,16 @@ from ..QuoteEngine.Quote import QuoteModel
 class TXTIngestor(IngestorInterface):
     allowed_extensions = ['txt']
 
-    def can_ingest(path) -> bool:
+    @classmethod
+    def can_ingest(cls, path) -> bool:
         ext = path.split('.')[-1]
         if ext in TXTIngestor.allowed_extensions:
             print("returning True")
             return True
         return False
 
-    def parse(path):
+    @classmethod
+    def parse(cls, path):
         quotes = []
         with open(path, mode="r") as data:
             lines = data.readlines()
@@ -24,8 +26,4 @@ class TXTIngestor(IngestorInterface):
             a_quote = QuoteModel(_quote.strip(), _author.strip())
             quotes.append(a_quote)
 
-        print("==================")
-        for i in quotes:
-            print(i)
-        print("==================")
         return quotes

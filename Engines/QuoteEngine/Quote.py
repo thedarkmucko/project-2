@@ -9,7 +9,7 @@ class QuoteModel:
 
     @property
     def author(self):
-        return self.author
+        return self._author
 
 
     def __str__(self):

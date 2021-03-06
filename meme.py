@@ -10,33 +10,36 @@ def generate_meme(path=None, body=None, author=None):
     """ Generate a meme given an path and a quote """
     quotes = []
     if path is None:
-        images = "./_data/photos/dog/"
+        images = "./Engines/_data/photos/dog/"
         imgs = []
         for root, dirs, files in os.walk(images):
             imgs = [os.path.join(root, name) for name in files]
-
         img = random.choice(imgs)
+
     else:
         img = path[0]
 
     if body is None:
-        quote_files = ['./_data/DogQuotes/DogQuotesTXT.txt',
-                       './_data/DogQuotes/DogQuotesDOCX.docx',
-                       './_data/DogQuotes/DogQuotesPDF.pdf',
-                       './_data/DogQuotes/DogQuotesCSV.csv']
+        quote_files = ['./Engines/_data/DogQuotes/DogQuotesTXT.txt',
+                       './Engines/_data/DogQuotes/DogQuotesDOCX.docx',
+                       './Engines/_data/DogQuotes/DogQuotesPDF.pdf',
+                       './Engines/_data/DogQuotes/DogQuotesCSV.csv']
 
         for f in quote_files:
-            if f == './_data/DogQuotes/DogQuotesTXT.txt':
-                # interesting, this returns None
-                quotes: List[QuoteModel] = Ingestor.parse(f)
+            print("processing ", f)
+            quotes.extend(Ingestor.parse(f))
+            print(quotes)
 
-        _quote = random.choice(quotes)
-    else:
-        if author is None or body is None:
+        try:
+            _quote = random.choice(quotes)
+            path = MemeEngine.make_meme(img, _quote.body, _quote.author)
+            return path
+        except Exception as e:
+            print("Error caught:", e)
+
+    elif author is None or body is None:
             raise Exception('Author Required if Body is Used')
 
-    path =  MemeEngine.make_meme(path, body, author)
-    return path
 
 
 def make_parser():

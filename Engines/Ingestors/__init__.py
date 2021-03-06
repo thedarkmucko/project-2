@@ -6,8 +6,8 @@ from .interface_ingestor import IngestorInterface
 
 
 class Ingestor(IngestorInterface):
-    allowed_extensions = ['txt','docx','pdf','txt']
-    ingestors = [DocxIngestor, CSVIngestor, PDFIngestor, TXTIngestor]
+    allowed_extensions = ['txt','docx','csv', 'pdf']
+    ingestors = [TXTIngestor, DocxIngestor, CSVIngestor, PDFIngestor]
 
     @classmethod
     def can_ingest(cls, path):
@@ -15,8 +15,7 @@ class Ingestor(IngestorInterface):
         return ext in cls.allowed_extensions
 
     @classmethod
-    def parse(cls, path) -> object:
+    def parse(cls, path):
         for ingestor in cls.ingestors:
             if ingestor.can_ingest(path):
-                print(ingestor)
-                ingestor.parse(path)
+                return ingestor.parse(path)
