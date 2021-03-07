@@ -36,9 +36,8 @@ def generate_meme(path=None, body=None, author=None):
         except Exception as e:
             print("Error caught:", e)
 
-    elif author is None or body is None:
-            raise Exception('Author Required if Body is Used')
-
+    path = MemeEngine.make_meme(path, body, author)
+    return path
 
 
 def make_parser():

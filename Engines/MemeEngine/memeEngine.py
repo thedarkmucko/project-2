@@ -1,6 +1,9 @@
 from PIL import Image, UnidentifiedImageError, ImageDraw, ImageFont
 from random import randint
 
+output_file = randint(100000,200000)
+
+
 def resize_image(_in: str, _width: int):
     """resize an image to max width 500px and height ratio-ed"""
     try:
@@ -10,7 +13,6 @@ def resize_image(_in: str, _width: int):
 
     img_width, img_height = img.size
 
-    output_file = randint(100000,200000)
     if img_width > 500:
         width = _width
         ratio = width / img_width
@@ -29,12 +31,12 @@ def fill_text(path: str, body: str, author: str):
         draw = ImageDraw.Draw(img)
         font = ImageFont.truetype('./fonts/OpenSans-Regular.ttf', size=20)
         message = '\"'+ body + '\", said ' + author
-        draw.text((10, 30), message, font=font, fill='red')
-        img.save("./Engines/tmp/printme.jpeg")
+        draw.text((10, 30), message, font=font, fill='white')
+        img.save(f"./Engines/tmp/p{output_file}.jpg")
     except Exception as e:
         print("Exception caught: ",e)
 
-    return "./Engines/tmp/printme.jpg"
+    return f"./Engines/tmp/p{output_file}.jpg"
 
 
 def make_housekeeping(path):
@@ -50,9 +52,9 @@ def make_housekeeping(path):
 
 class MemeEngine:
     @staticmethod
-    def make_meme(img, body: str, author: str, width=500):
-        make_housekeeping("./Engines/tmp")
-        resized_image = resize_image(img, width)
+    def make_meme(path, body: str, author: str, width=500):
+        # make_housekeeping("./Engines/tmp")
+        resized_image = resize_image(path, width)
         outfile = fill_text(resized_image, body, author)
         return outfile
 
