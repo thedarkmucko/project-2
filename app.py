@@ -3,7 +3,7 @@ from Engines.MemeEngine.memeEngine import MemeEngine
 from Engines.Ingestors import Ingestor
 import os, random
 
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__, template_folder='templates', static_folder='static')
 
 
 # finished setup()
@@ -37,9 +37,9 @@ def meme_rand():
     img = random.choice(imgs)
     quote = random.choice(quotes)
     out = MemeEngine.make_meme(img, quote.body, quote.author)
-    print(f"File path of modified picture: {out}")
-    return render_template('meme.j2',
-                           path=out)
+
+    return render_template('meme.j2', path=out)
+
 
 @app.route('/create', methods=['GET'])
 def meme_form():
@@ -64,4 +64,4 @@ def meme_post():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
