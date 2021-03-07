@@ -1,30 +1,35 @@
 from flask import Flask, render_template
-from meme_proj.Engines import MemeEngine
+from Engines.MemeEngine.memeEngine import MemeEngine
+from Engines.Ingestors import Ingestor
+import os, random
 
-# @TODO Import your Ingestors and MemeEngine classes
+project_root = os.path.dirname(__file__)
+template_path = os.path.join(project_root, 'templates')
+static_path = os.path.join(project_root, 'Engines/tmp')
+print(template_path, static_path)
+app = Flask(__name__, template_folder=template_path, static_folder=static_path)
 
-app = Flask(__name__)
 
-
+# finished setup()
 def setup():
     """ Load all resources """
 
-    quote_files = ['./_data/DogQuotes/DogQuotesTXT.txt',
-                   './_data/DogQuotes/DogQuotesDOCX.docx',
-                   './_data/DogQuotes/DogQuotesPDF.pdf',
-                   './_data/DogQuotes/DogQuotesCSV.csv']
+    all_quotes = []
 
-    # TODO: Use the Ingestors class to parse all files in the
-    # quote_files variable
-    quotes = None
+    quote_files = ['./Engines/_data/DogQuotes/DogQuotesTXT.txt',
+                   './Engines/_data/DogQuotes/DogQuotesDOCX.docx',
+                   './Engines/_data/DogQuotes/DogQuotesPDF.pdf',
+                   './Engines/_data/DogQuotes/DogQuotesCSV.csv']
 
-    images_path = "Engines/_data/photos/dog/"
+    for f in quote_files:
+        all_quotes.extend(Ingestor.parse(f))
 
-    # TODO: Use the pythons standard library os class to find all
-    # images within the images images_path directory
-    imgs = None
+    images = "./Engines/_data/photos/dog/"
+    imgs = []
+    for root, dirs, files in os.walk(images):
+        imgs = [os.path.join(root, name) for name in files]
 
-    return quotes, imgs
+    return all_quotes, imgs
 
 
 quotes, imgs = setup()
@@ -33,16 +38,11 @@ quotes, imgs = setup()
 @app.route('/')
 def meme_rand():
     """ Generate a random meme """
-
-    # @TODO:
-    # Use the random python standard library class to:
-    # 1. select a random image from imgs array
-    # 2. select a random quote from the quotes array
-
-    img = None
-    quote = None
-    path = MemeEngine.make_meme(img, quote.body, quote.author)
-    return render_template('meme.html', path=path)
+    img = random.choice(imgs)
+    quote = random.choice(quotes)
+    out = MemeEngine.make_meme(img, quote.body, quote.author)
+    print(out)
+    return render_template('meme.html', path=out)
 
 
 @app.route('/create', methods=['GET'])

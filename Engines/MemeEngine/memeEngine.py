@@ -53,7 +53,7 @@ def make_housekeeping(path):
 class MemeEngine:
     @staticmethod
     def make_meme(path, body: str, author: str, width=500):
-        # make_housekeeping("./Engines/tmp")
+        make_housekeeping("./Engines/tmp")
         resized_image = resize_image(path, width)
         outfile = fill_text(resized_image, body, author)
         return outfile

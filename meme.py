@@ -2,8 +2,6 @@ import os
 import random
 from Engines.MemeEngine.memeEngine import MemeEngine
 from Engines.Ingestors import Ingestor
-from Engines.QuoteEngine.Quote import QuoteModel
-from typing import List
 
 
 def generate_meme(path=None, body=None, author=None):
