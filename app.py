@@ -3,18 +3,14 @@ from Engines.MemeEngine.memeEngine import MemeEngine
 from Engines.Ingestors import Ingestor
 import os, random
 
-project_root = os.path.dirname(__file__)
-template_path = os.path.join(project_root, 'templates')
-static_path = os.path.join(project_root, 'Engines/tmp')
-print(template_path, static_path)
-app = Flask(__name__, template_folder=template_path, static_folder=static_path)
+app = Flask(__name__, template_folder='templates')
 
 
 # finished setup()
 def setup():
     """ Load all resources """
 
-    all_quotes = []
+    all_quotes = list()
 
     quote_files = ['./Engines/_data/DogQuotes/DogQuotesTXT.txt',
                    './Engines/_data/DogQuotes/DogQuotesDOCX.docx',
@@ -25,11 +21,11 @@ def setup():
         all_quotes.extend(Ingestor.parse(f))
 
     images = "./Engines/_data/photos/dog/"
-    imgs = []
+    img_list = list()
     for root, dirs, files in os.walk(images):
-        imgs = [os.path.join(root, name) for name in files]
+        img_list = [os.path.join(root, name) for name in files]
 
-    return all_quotes, imgs
+    return all_quotes, img_list
 
 
 quotes, imgs = setup()
@@ -41,14 +37,14 @@ def meme_rand():
     img = random.choice(imgs)
     quote = random.choice(quotes)
     out = MemeEngine.make_meme(img, quote.body, quote.author)
-    print(out)
-    return render_template('meme.html', path=out)
-
+    print(f"File path of modified picture: {out}")
+    return render_template('meme.j2',
+                           path=out)
 
 @app.route('/create', methods=['GET'])
 def meme_form():
     """ User input for meme information """
-    return render_template('meme_form.html')
+    return render_template('meme_form.j2')
 
 
 @app.route('/create', methods=['POST'])
@@ -64,8 +60,8 @@ def meme_post():
 
     path = None
 
-    return render_template('meme.html', path=path)
+    return render_template('meme.j2', path=path)
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
