@@ -15,7 +15,7 @@ class CSVIngestor(IngestorInterface):
 
     @classmethod
     def parse(cls, path):
-        quotes= []
+        quotes = []
         df = pandas.read_csv(path, header=0)
 
         for index, row in df.iterrows():

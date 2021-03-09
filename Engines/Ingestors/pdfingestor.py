@@ -19,7 +19,6 @@ class PDFIngestor(IngestorInterface):
 
         cmd = ["pdftotext", path]
         process = subprocess.Popen(cmd, stdout=subprocess.PIPE)
-        
         output, _ = process.communicate()
         output = output.splitlines()
 

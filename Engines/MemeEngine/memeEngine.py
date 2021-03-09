@@ -7,10 +7,8 @@ def resize_image(_in: str, _width: int):
     output_file = randint(100000, 200000)
     try:
         img = Image.open(_in)
-        """
-        Converting to RGB, because some files on the internet might have 
-        RGBA and that will throw an error 
-        """
+        """Converting to RGB, because some files on the internet might have
+        RGBA and that will throw an error"""
         img = img.convert('RGB')
     except UnidentifiedImageError:
         print("failed to open image")
@@ -39,7 +37,7 @@ def fill_text(path: str, body: str, author: str):
         draw.text((10, 30), message, font=font, fill='white')
         img.save(f"./static/p{output_file}.jpg")
     except Exception as e:
-        print("Exception caught: ",e)
+        print("Exception caught: ", e)
 
     return f"./static/p{output_file}.jpg"
 
@@ -57,7 +55,6 @@ def make_housekeeping(path):
     os.chdir(current)
 
 
-
 class MemeEngine:
     @staticmethod
     def make_meme(path, body: str, author: str, width=500):
@@ -66,4 +63,3 @@ class MemeEngine:
         resized_image = resize_image(path, width)
         outfile = fill_text(resized_image, body, author)
         return outfile
-

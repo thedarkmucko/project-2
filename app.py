@@ -1,8 +1,10 @@
 from flask import Flask, render_template
 from Engines.MemeEngine.memeEngine import MemeEngine
 from Engines.Ingestors import Ingestor
-import os, random
+import os
+import random
 import requests as req
+
 
 app = Flask(__name__, template_folder='./templates')
 

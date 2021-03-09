@@ -11,6 +11,5 @@ class QuoteModel:
     def author(self):
         return self._author
 
-
     def __str__(self):
         return f"{self._quote} - {self._author}"
